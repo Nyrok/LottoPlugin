@@ -9,6 +9,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use pocketmine\Player;
 use DateTime;
 use DateTimeZone;
 
@@ -41,6 +42,11 @@ class Main extends PluginBase{
     }
     public function onLoad()
     {
+        $version = explode(".", $this->getServer()->getApiVersion());
+        if($version[0] !== "3"){
+            $this->getLogger()->alert("Ce plugin marche qu'en version 3.X.X de Pocketmine !");
+            $this->getServer()->getPluginManager()->disablePlugin($this);
+        }
         if(!$this->getServer()->getPluginManager()->getPlugin("EconomyAPI")){
             $this->getLogger()->alert("Vous n'avez pas EconomyAPI sur le serveur !");
             $this->getServer()->getPluginManager()->disablePlugin($this);
@@ -69,76 +75,82 @@ class Main extends PluginBase{
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
     {
         $this->config->reload();
-        switch($command->getName()){
-            case "loto":
-                $date = new DateTime();
-                $date->setTimezone(new DateTimeZone("Europe/Paris"));
-                $minutes = $date->format("i");
-                $restant = 60 - (int)$minutes;
-                $this->config->save();
-                $addicts = gettype($this->config->get("loto")) === "array" ? $this->config->get("loto") : array();
-                $cashprize = 0;
-                foreach ($addicts as $amount){
-                    $cashprize = $cashprize + $amount;
-                }
-                $message = $this->config->getNested("messages.success.loto-command-answer");
-                $message = str_replace("{cashprize}", "$cashprize", $message);
-                $message = str_replace("{timeleft}", "$restant", $message);
-                $sender->sendMessage($message);
-                break;
-            case "ticket":
-                $this->config->save();
-                $amplifier = $this->config->get("ticket-price") ?? 100;
-                if(isset($args[0])){
-                    if($args[0] === "buy"){
-                        if(isset($args[1])){
-                            $amount = $args[1];
-                            $amount = (int)$amount*$amplifier;
-                            if(EconomyAPI::getInstance()->myMoney($sender->getName()) >= $amount && $amount > 0){
-                                EconomyAPI::getInstance()->reduceMoney($sender->getName(), $amount);
-                                $this->config->save();
-                                $this->config->setNested("loto.".$sender->getName(), ($this->config->getNested("loto.".$sender->getName()) ?? 0) + $amount);
-                                $this->config->save();
-                                $message = $this->config->getNested("messages.success.ticket-buy");
-                                $message = str_replace("{amount}", "$amount", $message);
-                                $message = str_replace("{tickets}", (string)($amount/$amplifier), $message);
-                                $sender->sendMessage($message);
-                            }
-                            else if($amount <= 0){
-                                $message = $this->config->getNested("messages.errors.cant-buy-under-one");
-                                $message = str_replace("{tickets}", (string)($amount/$amplifier), $message);
-                                $sender->sendMessage($message);
+        if($sender instanceof Player){
+            switch($command->getName()){
+                case "loto":
+                    $date = new DateTime();
+                    $date->setTimezone(new DateTimeZone("Europe/Paris"));
+                    $minutes = $date->format("i");
+                    $restant = 60 - (int)$minutes;
+                    $this->config->save();
+                    $addicts = gettype($this->config->get("loto")) === "array" ? $this->config->get("loto") : array();
+                    $cashprize = 0;
+                    foreach ($addicts as $amount){
+                        $cashprize = $cashprize + $amount;
+                    }
+                    $message = $this->config->getNested("messages.success.loto-command-answer");
+                    $message = str_replace("{cashprize}", "$cashprize", $message);
+                    $message = str_replace("{timeleft}", "$restant", $message);
+                    $sender->sendMessage($message);
+                    break;
+                case "ticket":
+                    $this->config->save();
+                    $amplifier = $this->config->get("ticket-price") ?? 100;
+                    if(isset($args[0])){
+                        if($args[0] === "buy"){
+                            if(isset($args[1])){
+                                $amount = $args[1];
+                                $amount = (int)$amount*$amplifier;
+                                if(EconomyAPI::getInstance()->myMoney($sender->getName()) >= $amount && $amount > 0){
+                                    EconomyAPI::getInstance()->reduceMoney($sender->getName(), $amount);
+                                    $this->config->save();
+                                    $this->config->setNested("loto.".$sender->getName(), ($this->config->getNested("loto.".$sender->getName()) ?? 0) + $amount);
+                                    $this->config->save();
+                                    $message = $this->config->getNested("messages.success.ticket-buy");
+                                    $message = str_replace("{amount}", "$amount", $message);
+                                    $message = str_replace("{tickets}", (string)($amount/$amplifier), $message);
+                                    $sender->sendMessage($message);
+                                }
+                                else if($amount <= 0){
+                                    $message = $this->config->getNested("messages.errors.cant-buy-under-one");
+                                    $message = str_replace("{tickets}", (string)($amount/$amplifier), $message);
+                                    $sender->sendMessage($message);
+                                }
+                                else {
+                                    $message = $this->config->getNested("messages.errors.not-enough-money");
+                                    $message = str_replace("{tickets}", (string)($amount/$amplifier), $message);
+                                    $sender->sendMessage($message);
+                                }
                             }
                             else {
-                                $message = $this->config->getNested("messages.errors.not-enough-money");
-                                $message = str_replace("{tickets}", (string)($amount/$amplifier), $message);
+                                $message = $this->config->getNested("messages.errors.didnt-enter-amount");
                                 $sender->sendMessage($message);
                             }
                         }
+                        else if($args[0] === "info") {
+                            $this->config->save();
+                            $amount = $this->config->getNested("loto.".$sender->getName());
+                            $message = $this->config->getNested("messages.success.ticket-info-buyed");
+                            $message = str_replace("{tickets}",  (string)($amount / $amplifier), $message);
+                            $message = str_replace("{amount}", (string)$amount, $message);
+                            $info = $this->config->getNested("loto.".$sender->getName()) ? $message : $this->config->getNested("messages.success.ticket-info-not-buyed");
+                            $sender->sendMessage($info);
+
+                        }
                         else {
-                            $message = $this->config->getNested("messages.errors.didnt-enter-amount");
+                            $message = $this->config->getNested("messages.errors.usage");
                             $sender->sendMessage($message);
                         }
-                    }
-                    else if($args[0] === "info") {
-                        $this->config->save();
-                        $amount = $this->config->getNested("loto.".$sender->getName());
-                        $message = $this->config->getNested("messages.success.ticket-info-buyed");
-                        $message = str_replace("{tickets}",  (string)($amount / $amplifier), $message);
-                        $message = str_replace("{amount}", (string)$amount, $message);
-                        $info = $this->config->getNested("loto.".$sender->getName()) ? $message : $this->config->getNested("messages.success.ticket-info-not-buyed");
-                        $sender->sendMessage($info);
-
                     }
                     else {
                         $message = $this->config->getNested("messages.errors.usage");
                         $sender->sendMessage($message);
                     }
-                }
-                else {
-                    $message = $this->config->getNested("messages.errors.usage");
-                    $sender->sendMessage($message);
-                }
+
+            }
+        }
+        else {
+            $this->getLogger()->alert("Commande exécutable uniquement en jeu !");
         }
         return true;
     }
