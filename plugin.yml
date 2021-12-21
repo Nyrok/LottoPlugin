@@ -8,4 +8,6 @@ commands:
     description: Voir le temps restant du loto. Powered by @Nyrok10 on Twitter.
   ticket:
     description: Acheter des tickets pour jouer au loto. Powered by @Nyrok10 on Twitter.
+depend:
+  - EconomyAPI
 ...
