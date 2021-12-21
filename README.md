@@ -6,7 +6,7 @@
 > - Tirage au sort automatique
 # Utilisation
 ## Initialisation
-You have to install [Pocketmine](https://github.com/pmmp/PocketMine-MP) 3.X.X version.
+You have to install [Pocketmine](https://github.com/pmmp/PocketMine-MP) 3.X.X version.<br>
 You have to install [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI/) in your PMMP Server. 
 ## Commandes
 
