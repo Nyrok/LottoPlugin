@@ -69,8 +69,7 @@ You have to install [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI/) in your P
  - `info-not-buyed`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.success.info-not-buyed| Le message quand la personne regarde <br>son nombre de ticket et n'en 
-> possède pas | Success |
+> | messages.success.info-not-buyed| Le message quand la personne regarde <br>son nombre de ticket et n'en possède pas | Success |
  - `loto-command-answer`
 > | Name  | Description | Type |
 > |--|--|--|
