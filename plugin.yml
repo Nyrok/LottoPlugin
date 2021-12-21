@@ -1,13 +1,13 @@
 ---
-name: LotoPlugin
+name: LottoPlugin
 version: 1.0.0
-main: Nyrok\LotoPlugin\Main
+main: Nyrok\LottoPlugin\Main
 api: [ 3.0.0 ]
 commands:
-  loto:
-    description: Voir le temps restant du loto. Powered by @Nyrok10 on Twitter.
+  lotto:
+    description: Voir le temps restant du lotto. Powered by @Nyrok10 on Twitter.
   ticket:
-    description: Acheter des tickets pour jouer au loto. Powered by @Nyrok10 on Twitter.
+    description: Acheter des tickets pour jouer au lotto. Powered by @Nyrok10 on Twitter.
 depend:
   - EconomyAPI
 ...
