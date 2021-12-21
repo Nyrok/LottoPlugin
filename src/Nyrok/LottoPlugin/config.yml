@@ -1,0 +1,23 @@
+---
+ticket-price: 100
+repeating-time: 15
+messages:
+  success:
+    win: §a{winner} has won lotto for {cashprize}$ and {participants} participants !
+    no-winner: §aNobody was in lotto.
+    repeating: §aDraw in {timeleft} minutes with current total sum of {cashprize}$
+    ticket-buy: §aYou successfully buyed {tickets} tickets for {amount}$
+    ticket-info-buyed: §aYou have buyed {tickets} tickets for {amount}$
+    ticket-info-not-buyed: §aYou don't have tickets.
+    loto-command-answer: '§aTimeleft before draw : {timeleft} minutes and current
+      total sum is : {cashprize}$'
+  errors:
+    cant-buy-under-one: §cYou can't buy {tickets} ticket
+    not-enough-money: §cYou don't have enough money to buy {tickets} ticket
+    didnt-enter-amount: §cYou didn't enter an amount of tickets
+    usage: |-
+      §cUsage :
+      §c/ticket buy <amount>
+      §c/ticket info
+loto: []
+...

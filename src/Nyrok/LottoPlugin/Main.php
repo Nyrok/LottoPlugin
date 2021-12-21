@@ -36,7 +36,7 @@ class Main extends PluginBase{
                     "didnt-enter-amount" => "§cYou didn't enter an amount of tickets",
                     "usage" => "§cUsage :\n§c/ticket buy <"."amount>\n§c/ticket info"
                 )),
-            "loto" => array()));
+            "lotto" => array()));
         $this->getScheduler()->scheduleRepeatingTask(new LottoTask($this, $this->config), 1*20);
         $this->getLogger()->info("Made by @Nyrok10 on Twitter.");
     }
@@ -70,14 +70,14 @@ class Main extends PluginBase{
                     "didnt-enter-amount" => "§cYou didn't enter an amount of tickets",
                     "usage" => "§cUsage :\n§c/ticket buy <"."amount>\n§c/ticket info"
                 )),
-            "loto" => array()));
+            "lotto" => array()));
     }
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
     {
         $this->config->reload();
         if($sender instanceof Player){
             switch($command->getName()){
-                case "loto":
+                case "lotto":
                     $date = new DateTime();
                     $date->setTimezone(new DateTimeZone("Europe/Paris"));
                     $minutes = $date->format("i");
