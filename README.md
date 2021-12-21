@@ -19,7 +19,7 @@ You have to install [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI/) in your P
 	 - **buy** :
 		 - Description : Acheter un nombre de ticket.
 		 - Utilisation : `/ticket buy <nombre>`
-		- **info** :
+	- **info** :
 		 - Description : Voir son nombre de ticket.
 		 - Utilisation : `/ticket info`
 
@@ -108,7 +108,7 @@ You have to install [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI/) in your P
 
 # Changelog
 > ## **1.0.0**
->    * First release !*
+>    * First release !
 # Credits
 * Nyrok :
   - [Github](https://github.com/Nyrok) ![GitHub followers](https://img.shields.io/github/followers/Nyrok?style=social)
