@@ -1,3 +1,4 @@
+
 # LotoPlugin [![https://poggit.pmmp.io/p/LotoPlugin/](https://img.shields.io/badge/Made%20with-%F0%9F%92%96-red)]()
 # Features
 > - Compatibilité avec Pocketmine 3.X.X
@@ -24,6 +25,11 @@ You have to install [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI/) in your P
 		 - Utilisation : `/ticket info`
 
 ## Configuration of config.yml
+### Loto Values :
+> | Name  | Description | Default |
+> |--|--|--|
+> | ticket-price |Prix d'un ticket à l'unité | 100
+> | repeating-time |La récurrence des rappels du loto (minutes)| 15
 ### Success :
  - `win`
 > | Name  | Description | Type |
