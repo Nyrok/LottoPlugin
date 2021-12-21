@@ -55,7 +55,7 @@ You have to install [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI/) in your P
 > 
 > | Parameters: | Replaced by |
 > |--|--|
-> | {unity} |Nombre de ticket | 
+> | {tickets} |Nombre de ticket | 
 > | {amount} | Somme de l'achat | 
  - `info-buyed`
 > | Name  | Description | Type |
