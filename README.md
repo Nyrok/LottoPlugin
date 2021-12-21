@@ -1,115 +1,115 @@
 
-# LotoPlugin [![https://poggit.pmmp.io/p/LotoPlugin/](https://img.shields.io/badge/Made%20with-%F0%9F%92%96-red)]()
+# LottoPlugin [![https://poggit.pmmp.io/p/LottoPlugin/](https://img.shields.io/badge/Made%20with-%F0%9F%92%96-red)]()
 # Features
-> - Compatibilité avec Pocketmine 3.X.X
-> - Customisation complète
-> - Lancement automatique dès le démarrage
-> - Tirage au sort automatique
-# Utilisation
+> - Compatibility with Pocketmine 3.X.X
+> - Full Customization
+> - Automatic Launch
+> - Automatic Draw
+# Usage
 ## Initialisation
 You have to install [Pocketmine](https://github.com/pmmp/PocketMine-MP) 3.X.X version.<br>
 You have to install [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI/) in your PMMP Server. 
-## Commandes
+## Commands
 
- - **Loto** :
-	 - Description : Voir le temps restant du loto et la somme totale actuelle.
-	 - Permission : Aucune.
+ - **Lotto** :
+	 - Description : View the remaining lotto time and the current total amount.
+	 - Permission : None.
  - **Ticket** :
-	 - Description : Voir le temps restant du loto et la somme totale actuelle.
-	 - Permission : Aucune.	
+	 - Description : See the remaining lotto time and the current total sum.
+	 - Permission : None.	
 	 - **buy** :
-		 - Description : Acheter un nombre de ticket.
-		 - Utilisation : `/ticket buy <nombre>`
+		 - Description : Buy tickets.
+		 - Usage : `/ticket buy <amount>`
 	- **info** :
-		 - Description : Voir son nombre de ticket.
-		 - Utilisation : `/ticket info`
+		 - Description : See your tickets.
+		 - Usage : `/ticket info`
 
 ## Configuration of config.yml
-### Loto Values :
+### Lotto Values :
 > | Name  | Description | Default |
 > |--|--|--|
-> | ticket-price |Prix d'un ticket à l'unité | 100
-> | repeating-time |La récurrence des rappels du loto (minutes)| 15
+> | ticket-price |Unity's ticket price | 100
+> | repeating-time |The recurrence of lotto reminders (minutes)| 15
 ### Success :
  - `win`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.success.win | Le message lorsqu'une <br>personne gagne le loto | Success |
+> | messages.success.win |The message when a <br> person wins the lotto | Success |
 >
 > | Parameters: | Replaced by |
 > |--|--|
-> | {winner} | Le nom du gagnant | 
-> | {cashprize} | La somme total du loto| 
-> | {participants} | Le nombre de participant| 
+> | {winner} | Winner's name | 
+> | {cashprize} | Current total sum | 
+> | {participants} | Participants's number| 
  - `no-winner`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.success.no-winner | Le message lorsqu'il <br>n'y a aucun participant | Success |
+> | messages.success.no-winner | The message when there's none participant | Success |
  - `repeating`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.success.repeating | Le message qui se répète<br> suivant un temps définit | Success |
+> | messages.success.repeating | The message that repeats itself after a defined time | Success |
 > 
 > | Parameters: | Replaced by |
 > |--|--|
 > | {timeleft} | Temps restant | 
-> | {cashprize} | La somme total du loto | 
+> | {cashprize} | Current total sum | 
  - `ticket-buy`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.success.ticket-buy | Le message quand l'on <br>achète un/des ticket(s) | Success |
+> | messages.success.ticket-buy | The message when you buy tickets | Success |
 > 
 > | Parameters: | Replaced by |
 > |--|--|
-> | {tickets} |Nombre de ticket | 
-> | {amount} | Somme de l'achat | 
+> | {tickets} | Tickets amount | 
+> | {amount} | Sum of buying | 
  - `info-buyed`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.success.info-buyed| Le message quand la personne regarde <br>son nombre de ticket et en possède | Success |
+> | messages.success.info-buyed| The message when the person looks <br> his ticket number and has some | Success |
 > 
 > | Parameters: | Replaced by |
 > |--|--|
-> | {tickets} |Nombre de ticket | 
-> | {amount} | Somme des tickets | 
+> | {tickets} |Tickets amount | 
+> | {amount} | Sum of buying | 
  - `info-not-buyed`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.success.info-not-buyed| Le message quand la personne regarde <br>son nombre de ticket et n'en possède pas | Success |
+> | messages.success.info-not-buyed| The message when the person looks <br> his ticket number and does not have one | Success |
  - `loto-command-answer`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.success.loto-command-answer| Le message quand la personne regarde <br>le temps restant du loto et sa somme | Success |
+> | messages.success.loto-command-answer| The message when the person looks at the remaining lotto time and its sum | Success |
 > 
 > | Parameters: | Replaced by |
 > |--|--|
-> | {timeleft} | Temps restant | 
-> | {cashprize} | La somme total du loto | 
+> | {timeleft} | Time left | 
+> | {cashprize} | Current total sum | 
 ### Errors :
  - `cant-buy-under-one`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.errors.cant-buy-under-one | Le message quand la personne entre un <br> nombre inférieur à 1 de ticket à acheter | Error |
+> | messages.errors.cant-buy-under-one | The message when the person enters a number less than 1 of tickets to buy | Error |
 > 
 > | Parameters: | Replaced by |
 > |--|--|
-> | {tickets} |Nombre entré | 
+> | {tickets} |Input number | 
  - `not-enough-money`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.errors.not-enough-money | Le message quand la personne<br>n'a pas assez d'argent  | Error |
+> | messages.errors.not-enough-money |The message when the person <br> doesn't have enough money | Error |
 > 
 > | Parameters: | Replaced by |
 > |--|--|
-> | {tickets} |Nombre de ticket tenté d'acheter | 
+> | {tickets} | Input number | 
  - `didnt-enter-amount`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.errors.didnt-enter-amount | Le message quand la personne n'a <br> pas entré de montant à acheter  | Error |
+> | messages.errors.didnt-enter-amount | The message when the person has <br> not entered an amount to buy| Error |
  - `usage`
 > | Name  | Description | Type |
 > |--|--|--|
-> | messages.errors.usage | Le message quand la personne <br> n'entre ni **buy** ni **info** dans la commande | Error
+> | messages.errors.usage |The message when the person <br> does not enter **buy** or **info** in the order| Error
 
 # Changelog
 > ## **1.0.0**
@@ -118,6 +118,6 @@ You have to install [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI/) in your P
 * Nyrok :
   - [Github](https://github.com/Nyrok) ![GitHub followers](https://img.shields.io/github/followers/Nyrok?style=social)
   - [Twitter](https://twitter.com/@Nyrok10) ![Twitter Follow](https://img.shields.io/twitter/follow/Nyrok10?style=social)
-> Don't forget to Star this open-source repo ! ![GitHub Repo stars](https://img.shields.io/github/stars/Nyrok/LotoPlugin?style=social)
+> Don't forget to Star this open-source repo ! ![GitHub Repo stars](https://img.shields.io/github/stars/Nyrok/LottoPlugin?style=social)
 # License
 Apache-2.0
