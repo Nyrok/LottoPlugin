@@ -113,7 +113,7 @@ You have to install [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI/) in your P
 
 # Changelog
 > ## **2.0.0**
->    * Compatibility to PocketMine-MP 4.X.X.
+>    * Now supports PocketMine-MP 4.X.X.
 # Credits
 * Nyrok :
   - [Github](https://github.com/Nyrok) ![GitHub followers](https://img.shields.io/github/followers/Nyrok?style=social)
