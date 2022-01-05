@@ -2,6 +2,7 @@
 
 namespace Nyrok\LottoPlugin;
 
+use JsonException;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\scheduler\Task;
 use DateTime;
@@ -19,7 +20,10 @@ class LottoTask extends Task
         $this->config = $config;
     }
 
-    public function onRun(int $currentTick)
+    /**
+     * @throws JsonException
+     */
+    public function onRun():void
     {
         $this->config->reload();
         $date = new DateTime();

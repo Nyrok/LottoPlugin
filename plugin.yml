@@ -1,8 +1,8 @@
 ---
 name: LottoPlugin
-version: 1.0.0
+version: 2.0.0
 main: Nyrok\LottoPlugin\Main
-api: [ 3.0.0 ]
+api: [ 4.0.0 ]
 commands:
   lotto:
     description: See timeleft before next lotto. Powered by @Nyrok10 on Twitter.

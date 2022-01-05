@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace Nyrok\LottoPlugin;
 
+use JsonException;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-use pocketmine\Player;
 use DateTime;
 use DateTimeZone;
 
 class Main extends PluginBase{
     private Config $config;
-    public function onEnable()
+    public function onEnable(): void
     {
         $this->config = new Config($this->getDataFolder()."config.yml", Config::YAML, array(
             "ticket-price" => 100,
@@ -40,7 +41,7 @@ class Main extends PluginBase{
         $this->getScheduler()->scheduleRepeatingTask(new LottoTask($this, $this->config), 1*20);
         $this->getLogger()->info("Made by @Nyrok10 on Twitter.");
     }
-    public function onLoad()
+    public function onLoad(): void
     {
         $version = explode(".", $this->getServer()->getApiVersion());
         if($version[0] !== "3"){
@@ -72,6 +73,10 @@ class Main extends PluginBase{
                 )),
             "lotto" => array()));
     }
+
+    /**
+     * @throws JsonException
+     */
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
     {
         $this->config->reload();
