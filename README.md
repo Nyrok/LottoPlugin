@@ -112,8 +112,10 @@ You have to install [EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI/) in your P
 > | messages.errors.usage |The message when the person <br> does not enter **buy** or **info** in the order| Error
 
 # Changelog
-> ## **1.0.0**
->    * First release !
+> ## **1.0.1**
+>    * Fix of win message when nobody won.
+>    * Fix of draw time system.
+>    * Fix of plugin.yml.
 # Credits
 * Nyrok :
   - [Github](https://github.com/Nyrok) ![GitHub followers](https://img.shields.io/github/followers/Nyrok?style=social)
