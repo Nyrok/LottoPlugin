@@ -30,7 +30,7 @@ class LottoTask extends Task
         $repeating = $this->config->get("repeating-time") ?? 15;
         $repeating = $repeating >= 60 || $repeating <= 1 ? 15 : $repeating;
         if(gettype($minutes / $repeating) === "integer" && $seconds == 0){
-            $restant = 60 - (int)$minutes;
+            $restant = 60 - (int)$minutes === 60 ? 0 : 60 - (int)$minutes;
             $addicts = gettype($this->config->get("lotto")) === "array" ? $this->config->get("lotto") : array() ;
             $cashprize = 0;
             foreach ($addicts as $amount){
@@ -42,6 +42,7 @@ class LottoTask extends Task
             $this->main->getServer()->broadcastMessage($message);
         }
         if($minutes == 0 && $seconds == 0){
+            $this->config->save();
             $is_someone = gettype($this->config->get("lotto")) === "array" ? $this->config->get("lotto") : null;
             $is_someone = $is_someone === [] && gettype($is_someone) === "array" ? array_push($is_someone, array("Nobody")) : $is_someone;
             $addicts = $is_someone !== null ? $this->config->get("lotto") : array();
@@ -54,8 +55,7 @@ class LottoTask extends Task
             $message = str_replace("{winner}", (string)$winner, $message);
             $message = str_replace("{participants}", (string)count($addicts), $message);
             $message = str_replace("{cashprize}", (string)$cashprize, $message);
-            $win = $winner !== "Personne" ? $message : $this->config->getNested("messages.success.no-winner");
-            $this->config->save();
+            $win = $winner !== "Nobody" ? $message : $this->config->getNested("messages.success.no-winner");
             $this->config->remove("lotto");
             $this->config->save();
             EconomyAPI::getInstance()->addMoney($winner, $cashprize);

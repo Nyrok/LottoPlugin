@@ -5,9 +5,11 @@ main: Nyrok\LottoPlugin\Main
 api: [ 3.0.0 ]
 commands:
   lotto:
-    description: Voir le temps restant du lotto. Powered by @Nyrok10 on Twitter.
+    description: See timeleft before next lotto. Powered by @Nyrok10 on Twitter.
+    aliases:
+    - loto
   ticket:
-    description: Acheter des tickets pour jouer au lotto. Powered by @Nyrok10 on Twitter.
+    description: Buy tickets to play at lotto. Powered by @Nyrok10 on Twitter.
 depend:
   - EconomyAPI
 ...

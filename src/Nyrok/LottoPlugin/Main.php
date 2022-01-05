@@ -83,7 +83,7 @@ class Main extends PluginBase{
                     $minutes = $date->format("i");
                     $restant = 60 - (int)$minutes;
                     $this->config->save();
-                    $addicts = gettype($this->config->get("loto")) === "array" ? $this->config->get("loto") : array();
+                    $addicts = gettype($this->config->get("lotto")) === "array" ? $this->config->get("lotto") : array();
                     $cashprize = 0;
                     foreach ($addicts as $amount){
                         $cashprize = $cashprize + $amount;
@@ -104,7 +104,7 @@ class Main extends PluginBase{
                                 if(EconomyAPI::getInstance()->myMoney($sender->getName()) >= $amount && $amount > 0){
                                     EconomyAPI::getInstance()->reduceMoney($sender->getName(), $amount);
                                     $this->config->save();
-                                    $this->config->setNested("loto.".$sender->getName(), ($this->config->getNested("loto.".$sender->getName()) ?? 0) + $amount);
+                                    $this->config->setNested("lotto.".$sender->getName(), ($this->config->getNested("lotto.".$sender->getName()) ?? 0) + $amount);
                                     $this->config->save();
                                     $message = $this->config->getNested("messages.success.ticket-buy");
                                     $message = str_replace("{amount}", "$amount", $message);
@@ -129,11 +129,11 @@ class Main extends PluginBase{
                         }
                         else if($args[0] === "info") {
                             $this->config->save();
-                            $amount = $this->config->getNested("loto.".$sender->getName());
+                            $amount = $this->config->getNested("lotto.".$sender->getName());
                             $message = $this->config->getNested("messages.success.ticket-info-buyed");
                             $message = str_replace("{tickets}",  (string)($amount / $amplifier), $message);
                             $message = str_replace("{amount}", (string)$amount, $message);
-                            $info = $this->config->getNested("loto.".$sender->getName()) ? $message : $this->config->getNested("messages.success.ticket-info-not-buyed");
+                            $info = $this->config->getNested("lotto.".$sender->getName()) ? $message : $this->config->getNested("messages.success.ticket-info-not-buyed");
                             $sender->sendMessage($info);
 
                         }
