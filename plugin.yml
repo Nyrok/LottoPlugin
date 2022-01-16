@@ -1,15 +1,24 @@
 ---
 name: LottoPlugin
-version: 2.0.0
+version: 1.0.0
 main: Nyrok\LottoPlugin\Main
 api: [ 4.0.0 ]
 commands:
   lotto:
-    description: See timeleft before next lotto. Powered by @Nyrok10 on Twitter.
+    description: Voir le temps restant du lotto. Powered by @Nyrok10 on Twitter.
     aliases:
     - loto
+    permission: lotto
   ticket:
-    description: Buy tickets to play at lotto. Powered by @Nyrok10 on Twitter.
+    description: Acheter des tickets pour jouer au lotto. Powered by @Nyrok10 on Twitter.
+    permission: ticket
+permissions:
+  lotto:
+    description: Voir le temps restant du lotto.
+    default: true
+  ticket:
+    description: Acheter des tickets pour jouer au lotto.
+    default: true
 depend:
   - EconomyAPI
 ...
